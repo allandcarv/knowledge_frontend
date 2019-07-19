@@ -14,6 +14,6 @@ require('axios').defaults.headers.common['Authorization'] = 'bearer eyJ0eXAiOiJK
 
 new Vue({
   store,
-  router,
+  router,  
   render: h => h(App),
 }).$mount('#app')
