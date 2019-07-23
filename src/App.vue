@@ -5,7 +5,8 @@
       :hideUserDropdown="!user"
     />
     <Menu v-id="user" />
-    <Content />
+    <Loading v-if="validateToken" />
+    <Content v-else />
     <Footer />
 
   </div>
@@ -20,10 +21,11 @@ import Header from "./components/template/Header";
 import Menu from "./components/template/Menu";
 import Content from "./components/template/Content";
 import Footer from "./components/template/Footer";
+import Loading from "./components/template/Loading";
 
 export default {
   name: 'app',
-  components: { Header, Menu, Content, Footer },
+  components: { Header, Menu, Content, Footer, Loading },
   computed: mapState(['isMenuVisible', 'user']),
   data: function() {
     return {
@@ -38,7 +40,7 @@ export default {
       const userData = JSON.parse(json)
       this.$store.commit('setUser', null)
 
-      if (!userDate) {
+      if (!userData) {
         this.validateToken = false
         return this.$router.push({ name: 'auth' })
       }
